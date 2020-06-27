@@ -1,20 +1,16 @@
-import * as fastify from "fastify";
-import * as fastifyBlipp from "fastify-blipp";
-import { Server, IncomingMessage, ServerResponse } from "http";
-import statusRoutes from "./modules/routes/status";
+import * as fastify from 'fastify';
+import * as fastifyBlipp from 'fastify-blipp';
+import { Server, IncomingMessage, ServerResponse } from 'http';
+import statusRoutes from './modules/routes/status';
 
-const server: fastify.FastifyInstance<
-  Server,
-  IncomingMessage,
-  ServerResponse
-> = fastify();
+const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
 
 server.register(fastifyBlipp);
 server.register(statusRoutes);
 
 const start = async () => {
   try {
-    await server.listen(3000, "0.0.0.0");
+    await server.listen(3000, '0.0.0.0');
     server.blipp();
   } catch (err) {
     console.log(err);
@@ -23,10 +19,10 @@ const start = async () => {
   }
 };
 
-process.on("uncaughtException", (error) => {
+process.on('uncaughtException', (error) => {
   console.error(error);
 });
-process.on("unhandledRejection", (error) => {
+process.on('unhandledRejection', (error) => {
   console.error(error);
 });
 
