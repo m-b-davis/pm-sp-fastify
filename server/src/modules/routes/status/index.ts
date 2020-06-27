@@ -1,4 +1,3 @@
-
 import * as fp from "fastify-plugin";
 
 export default fp(async (server, opts, next) => {
@@ -8,7 +7,7 @@ export default fp(async (server, opts, next) => {
     method: ["GET", "HEAD"],
     handler: async (request, reply) => {
       return reply.send({ date: new Date(), works: true });
-    }
+    },
   });
   next();
 });

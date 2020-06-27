@@ -23,10 +23,10 @@ const start = async () => {
   }
 };
 
-process.on("uncaughtException", error => {
+process.on("uncaughtException", (error) => {
   console.error(error);
 });
-process.on("unhandledRejection", error => {
+process.on("unhandledRejection", (error) => {
   console.error(error);
 });
 
