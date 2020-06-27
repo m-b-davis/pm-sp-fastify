@@ -1,6 +1,7 @@
 import * as fastify from 'fastify';
 import * as fastifyBlipp from 'fastify-blipp';
 import { Server, IncomingMessage, ServerResponse } from 'http';
+import * as cors from 'fastify-cors';
 
 import { Config } from './config';
 import pokemonRoutes from './modules/routes/pokemon';
@@ -9,6 +10,18 @@ const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> =
 
 server.register(fastifyBlipp);
 server.register(pokemonRoutes);
+
+server.register(cors, {
+  origin: (origin, cb) => {
+    if (/localhost/.test(origin)) {
+      //  Request from localhost will pass
+      cb(null, true);
+      return;
+    }
+
+    cb(new Error('Not allowed'), false);
+  },
+});
 
 const start = async () => {
   try {
