@@ -1,16 +1,18 @@
 import * as fastify from 'fastify';
 import * as fastifyBlipp from 'fastify-blipp';
 import { Server, IncomingMessage, ServerResponse } from 'http';
-import statusRoutes from './modules/routes/status';
+
+import { Config } from './config';
+import pokemonRoutes from './modules/routes/pokemon';
 
 const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
 
 server.register(fastifyBlipp);
-server.register(statusRoutes);
+server.register(pokemonRoutes);
 
 const start = async () => {
   try {
-    await server.listen(3000, '0.0.0.0');
+    await server.listen(Config.port, Config.host);
     server.blipp();
   } catch (err) {
     console.log(err);
@@ -22,6 +24,7 @@ const start = async () => {
 process.on('uncaughtException', (error) => {
   console.error(error);
 });
+
 process.on('unhandledRejection', (error) => {
   console.error(error);
 });

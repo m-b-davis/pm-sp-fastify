@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node --files ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon",
     "lint:fix": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "lint": "eslint '*/**/*.{js,ts}'"
   },
@@ -16,11 +15,13 @@
     "fastify": "^2.15.0",
     "fastify-blipp": "^2.3.1",
     "fastify-plugin": "^1.6.1",
+    "got": "^11.3.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
   "devDependencies": {
     "@types/node": "^14.0.14",
+    "@types/pokedex-promise-v2": "github:mudkipme/pokeapi-v2-typescript",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
     "eslint": "^7.3.1",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   },
   "husky": {

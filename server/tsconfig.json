@@ -12,6 +12,6 @@
     "sourceMap": true,
     "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "src/services/pokemon-api"],
   "exclude": ["node_modules"]
 }
