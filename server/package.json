@@ -26,6 +26,7 @@
     "@types/pokedex-promise-v2": "github:mudkipme/pokeapi-v2-typescript",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
+    "@zerollup/ts-transform-paths": "^1.7.18",
     "eslint": "^7.3.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
@@ -33,7 +34,8 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "ttypescript": "^1.5.10"
   },
   "husky": {
     "hooks": {

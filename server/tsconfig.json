@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "lib": ["es2016"],
     "paths": {
       "*": ["*", "src/*"]
     },
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }],
     "allowJs": true,
     "target": "es2016",
     "module": "commonjs",
