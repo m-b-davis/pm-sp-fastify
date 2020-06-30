@@ -8,11 +8,9 @@ import pokemonRoutes from 'routes/pokemon';
 
 const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
 
-server.register(fastifyBlipp);
-server.register(pokemonRoutes);
-
 server.register(cors, {
   origin: (origin, cb) => {
+    console.error(origin);
     if (/localhost/.test(origin)) {
       //  Request from localhost will pass
       cb(null, true);
@@ -22,6 +20,9 @@ server.register(cors, {
     cb(new Error('Not allowed'), false);
   },
 });
+
+server.register(fastifyBlipp);
+server.register(pokemonRoutes);
 
 const start = async () => {
   try {
