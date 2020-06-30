@@ -18,7 +18,7 @@ function getDescriptionText(response: Pokemon.SpeciesResponse) {
 
   const targetDescription = flavor_text_entries.find((entry) => entry.version.name === PREFERRED_VERSION_NAME);
 
-  const getFlavourTextString = (entry: Pokemon.FlavorTextEntry) => entry.flavor_text.toString();
+  const getFlavourTextString = (entry: Pokemon.FlavorTextEntry) => entry.flavor_text;
 
   if (targetDescription) {
     return getFlavourTextString(targetDescription);

@@ -2,7 +2,7 @@ import * as fp from 'fastify-plugin';
 import { ShakespeareApi, PokemonApi } from 'services';
 import { Errors } from 'utils';
 
-export default fp(async (server, options, next) => {
+export default fp(async (server, _, next) => {
   server.route({
     url: '/pokemon/:name',
     logLevel: 'warn',
@@ -10,9 +10,9 @@ export default fp(async (server, options, next) => {
     handler: async (request, reply) => {
       const { name } = request.params;
 
-      if (name === undefined) {
-        // Name not provided
-        return reply.send(404);
+      // Check if valid name passed
+      if (['', undefined].includes(name)) {
+        return reply.code(404).send(Errors.MissingName);
       }
 
       try {
@@ -22,7 +22,7 @@ export default fp(async (server, options, next) => {
           const translatedDescription = await ShakespeareApi.getShakesperianDescription(speciesInfo.description);
 
           return reply.send({
-            ...speciesInfo,
+            name: speciesInfo.name,
             description: translatedDescription,
           });
         } catch (error) {
@@ -33,5 +33,6 @@ export default fp(async (server, options, next) => {
       }
     },
   });
+
   next();
 });

@@ -4,7 +4,7 @@ import { Server, IncomingMessage, ServerResponse } from 'http';
 import * as cors from 'fastify-cors';
 
 import { Config } from './config';
-import pokemonRoutes from './modules/routes/pokemon';
+import pokemonRoutes from 'routes/pokemon';
 
 const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify();
 
