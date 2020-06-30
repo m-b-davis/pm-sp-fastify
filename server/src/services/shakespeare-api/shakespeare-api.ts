@@ -4,7 +4,7 @@ import { Shakespeare } from 'models';
 const BASE_URL = 'https://api.funtranslations.com';
 
 const UrlCreator = {
-  translate: () => `${BASE_URL}/translate/`,
+  translate: () => `${BASE_URL}/translate/shakespeare.json`,
 };
 
 /**
@@ -15,7 +15,7 @@ async function getShakesperianDescription(text: string) {
   const requestUrl = UrlCreator.translate();
 
   const { body } = await got.post<Shakespeare.TranslateResponse>(requestUrl, {
-    searchParams: text,
+    json: { text },
     responseType: 'json',
   });
 
