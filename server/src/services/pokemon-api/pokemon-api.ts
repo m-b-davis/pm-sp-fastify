@@ -1,6 +1,5 @@
 import got from 'got';
 import { Pokemon } from 'models';
-import { FlavorTextEntry } from 'models/pokemon.types';
 
 const BASE_URL = 'https://pokeapi.co/api/v2';
 const PREFERRED_VERSION_NAME = 'emerald';
@@ -19,7 +18,7 @@ function getDescriptionText(response: Pokemon.SpeciesResponse) {
 
   const targetDescription = flavor_text_entries.find((entry) => entry.version.name === PREFERRED_VERSION_NAME);
 
-  const getFlavourTextString = (entry: FlavorTextEntry) => entry.flavor_text.toString();
+  const getFlavourTextString = (entry: Pokemon.FlavorTextEntry) => entry.flavor_text.toString();
 
   if (targetDescription) {
     return getFlavourTextString(targetDescription);

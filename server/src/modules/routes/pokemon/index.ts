@@ -1,7 +1,8 @@
 import * as fp from 'fastify-plugin';
-import { PokemonApi } from '../../../services';
+import { ShakespeareApi, PokemonApi } from 'services';
+import { Errors } from 'utils';
 
-export default fp(async (server, opts, next) => {
+export default fp(async (server, options, next) => {
   server.route({
     url: '/pokemon/:name',
     logLevel: 'warn',
@@ -16,9 +17,19 @@ export default fp(async (server, opts, next) => {
 
       try {
         const speciesInfo = await PokemonApi.getPokemonInfo(name);
-        return reply.send(speciesInfo);
+
+        try {
+          const translatedDescription = await ShakespeareApi.getShakesperianDescription(speciesInfo.description);
+
+          return reply.send({
+            ...speciesInfo,
+            description: translatedDescription,
+          });
+        } catch (error) {
+          return reply.code(500).send(Errors.ShakespeareApiError);
+        }
       } catch (error) {
-        return reply.send(500);
+        return reply.code(500).send(Errors.PokemonApiError);
       }
     },
   });
