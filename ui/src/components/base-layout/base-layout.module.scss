@@ -1,0 +1,16 @@
+.baseLayout {
+  text-align: center;
+  background: #333;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content {
+  display: block;
+  margin: auto;
+}

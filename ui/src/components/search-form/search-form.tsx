@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { SearchInput } from '..';
+import { Input, Button } from '..';
+import styles from './search-form.module.scss';
 
 type Props = {
   onSearch: (term: string) => void;
@@ -14,8 +15,10 @@ export function SearchForm(props: Props) {
 
   return (
     <>
-      <SearchInput value={searchTerm} onChange={setSearchTerm} />
-      <button onClick={handleSearch}>Search</button>
+      <Input value={searchTerm} onChange={setSearchTerm} />
+      <div className={styles.buttonWrapper}>
+        <Button onClick={handleSearch}>Search</Button>
+      </div>
     </>
   );
 }

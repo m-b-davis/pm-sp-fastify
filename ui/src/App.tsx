@@ -1,25 +1,31 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { Router } from '@reach/router';
 
 import { SearchPage, NotFoundPage, InfoPage } from './pages';
+import { BaseLayout } from './components';
 
 import 'normalize.css';
-import styles from './App.module.css';
+import './styles/global.scss';
+
+export const Routes = {
+  root: '/',
+  search: '/search',
+  info: '/pokemon/:name',
+  notFound: '/not-found',
+};
+
+export const createInfoRoute = (name: string) => `/pokemon/${name}`;
 
 function App() {
   return (
     <BaseLayout>
       <Router>
-        <SearchPage path="" />
+        <SearchPage path="/" />
         <InfoPage path="/pokemon/:name" />
         <NotFoundPage default />
       </Router>
     </BaseLayout>
   );
 }
-
-const BaseLayout = (props: PropsWithChildren<unknown>) => {
-  return <div className={styles.app}>{props.children}</div>;
-};
 
 export default App;

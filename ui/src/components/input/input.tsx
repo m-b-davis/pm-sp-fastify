@@ -1,15 +1,15 @@
 import React, { ChangeEventHandler } from 'react';
-import styles from './search-input.module.css';
+import styles from './input.module.scss';
 
 type Props = {
   value: string;
   onChange: (value: string) => void;
 };
 
-export function SearchInput(props: Props) {
+export function Input(props: Props) {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     props.onChange(event.target.value);
   };
 
-  return <input value={props.value} onChange={handleChange}></input>;
+  return <input className={styles.input} value={props.value} onChange={handleChange}></input>;
 }

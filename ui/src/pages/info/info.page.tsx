@@ -1,39 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { InfoRouteProps } from 'src/routing';
+import React from 'react';
+import { RouteComponentProps } from '@reach/router';
+import { usePokemonInfo } from 'src/hooks';
+import { SearchResult, ApiStatus } from 'src/hooks/usePokemonInfo';
 
-type SearchResult = {
-  name: string;
-  description: string;
-};
+export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
+  const [data, apiStatus] = usePokemonInfo(props.name);
+  const result = apiStatus === ApiStatus.Success && (data as SearchResult);
 
-export default function InfoPage(props: InfoRouteProps) {
-  const searchTerm = props.name;
-  const [searchResult, setSearchResult] = useState<SearchResult | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchPokemonInfo(searchTerm?: string) {
-      if (searchTerm !== undefined) {
-        setIsLoading(true);
-        const url = `http://0.0.0.0:3000/pokemon/${searchTerm}`;
-        const result = await fetch(url);
-
-        if (result.ok) {
-          const json = await result.json();
-          setSearchResult(json);
-          setIsLoading(false);
-        }
-      }
-    }
-
-    fetchPokemonInfo(searchTerm);
-  }, [searchTerm]);
   return (
     <>
       <p>Pokemon name: {props.name}</p>
-      {isLoading && 'Loading'}
-      {searchResult && searchResult.name}
-      {searchResult && searchResult.description}
+      {apiStatus === ApiStatus.Loading && 'Loading'}
+      {result && result.name}
+      {apiStatus === ApiStatus.Error && 'Not found!'}
     </>
   );
 }
