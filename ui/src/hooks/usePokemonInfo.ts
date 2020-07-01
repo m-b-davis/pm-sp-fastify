@@ -12,6 +12,8 @@ export enum ApiStatus {
   Error,
 }
 
+const delay = (ms: number) => new Promise((res) => setTimeout(() => res(), ms));
+
 export function usePokemonInfo(searchTerm?: string) {
   const [searchResult, setSearchResult] = useState<SearchResult | undefined>();
   const [apiStatus, setApiStatus] = useState<ApiStatus>(ApiStatus.Ready);
@@ -21,6 +23,7 @@ export function usePokemonInfo(searchTerm?: string) {
       if (searchTerm !== undefined) {
         setApiStatus(ApiStatus.Loading);
         const url = `http://0.0.0.0:9191/pokemon/${searchTerm}`;
+        await delay(1000);
         const result = await fetch(url);
 
         console.log(result);

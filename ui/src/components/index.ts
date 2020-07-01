@@ -3,3 +3,4 @@ export * from './search-form/search-form';
 export * from './base-layout/base-layout.component';
 export * from './button/button.component';
 export * from './loader/loader';
+export * from './fade-router/fade-router';

@@ -25,7 +25,7 @@ export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
       {result && (
         <>
           <h1>{result.name}</h1>
-          <h2>{result.description}</h2>
+          <p>{result.description}</p>
         </>
       )}
       <Button onClick={handleSearchAgain}>Searcb again?</Button>

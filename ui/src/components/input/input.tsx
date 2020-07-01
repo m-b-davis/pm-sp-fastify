@@ -1,15 +1,19 @@
 import React, { ChangeEventHandler } from 'react';
 import styles from './input.module.scss';
+import { join } from 'src/utils';
 
 type Props = {
+  className?: string;
   value: string;
   onChange: (value: string) => void;
 };
 
-export function Input(props: Props) {
+export function Input({ onChange, className, value }: Props) {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    props.onChange(event.target.value);
+    onChange(event.target.value);
   };
 
-  return <input className={styles.input} value={props.value} onChange={handleChange}></input>;
+  const classes = join(className, styles.input);
+
+  return <input className={classes} value={value} onChange={handleChange}></input>;
 }

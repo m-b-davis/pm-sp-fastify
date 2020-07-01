@@ -1,6 +1,9 @@
 @import '../../styles/spacing.scss';
 
+@import '../../styles/variables.scss';
+
 .input {
-  width: 100%;
-  margin-bottom: $medium;
+  padding: $small;
+  width: 50%;
+  text-align: center;
 }

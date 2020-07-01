@@ -1,0 +1,24 @@
+.enter {
+  display: none;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity .3s ease-in;
+}
+
+.enterActive, .enterDone {
+  opacity: 1;
+}
+
+.exit {
+  opacity: 1;
+  z-index: 1;
+  transition: opacity .1s ease-in;
+}
+
+.exitActive, .exitDone {
+  opacity: 0;
+}
+
+.exitDone {
+  display: none;
+}

@@ -1,3 +1,7 @@
+@import '../../styles/spacing.scss';
+@import '../../styles/variables.scss';
+
 .button {
-  display: block;
+  cursor: pointer;
+  padding: $small;
 }

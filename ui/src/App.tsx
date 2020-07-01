@@ -1,8 +1,7 @@
 import React from 'react';
-import { Router } from '@reach/router';
 
 import { SearchPage, InfoPage } from './pages';
-import { BaseLayout } from './components';
+import { BaseLayout, FadeTransitionRouter } from './components';
 
 import 'normalize.css';
 import './styles/global.scss';
@@ -19,10 +18,10 @@ export const createInfoRoute = (name: string) => `/pokemon/${name}`;
 function App() {
   return (
     <BaseLayout>
-      <Router>
+      <FadeTransitionRouter>
         <InfoPage path={Routes.info} />
         <SearchPage default path={Routes.root} />
-      </Router>
+      </FadeTransitionRouter>
     </BaseLayout>
   );
 }

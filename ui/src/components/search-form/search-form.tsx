@@ -15,9 +15,11 @@ export function SearchForm(props: Props) {
 
   return (
     <>
-      <Input value={searchTerm} onChange={setSearchTerm} />
-      <div className={styles.buttonWrapper}>
-        <Button onClick={handleSearch}>Search</Button>
+      <div className={styles.wrapper}>
+        <Input className={styles.searchInput} value={searchTerm} onChange={setSearchTerm} />
+        <Button className={styles.searchButton} onClick={handleSearch}>
+          Go!
+        </Button>
       </div>
     </>
   );
