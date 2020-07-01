@@ -11,7 +11,8 @@ export default function SearchPage(_: RouteComponentProps) {
 
   return (
     <>
-      <h1>Shakespeare Pokemon Search</h1>
+      <p>Shakespeare Pokemon Search</p>
+      <h1>Enter Pokemon Name!</h1>
       <SearchForm onSearch={handleSearch} />
     </>
   );

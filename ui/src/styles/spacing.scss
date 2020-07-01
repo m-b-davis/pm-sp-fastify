@@ -2,19 +2,19 @@ $small: 16px;
 $medium: 24px;
 $large: 32px;
 
-$sizes:
+$spacing-sizes:
   "small" $small,
   "medium" $medium,
   "large" $large;
 
-$dimensions: 
+$spacing-dimensions: 
   "left" "l",
   "top" "t",
   "right" "r",
   "bottom" "b";
 
-@each $name, $size in $sizes {
-  @each $side, $key in $dimensions {
+@each $name, $size in $spacing-sizes {
+  @each $side, $key in $spacing-dimensions {
     .m#{$key}-#{$name} {
       margin-#{$side}: $size;
     }

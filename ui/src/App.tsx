@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router } from '@reach/router';
 
-import { SearchPage, NotFoundPage, InfoPage } from './pages';
+import { SearchPage, InfoPage } from './pages';
 import { BaseLayout } from './components';
 
 import 'normalize.css';
@@ -20,9 +20,8 @@ function App() {
   return (
     <BaseLayout>
       <Router>
-        <SearchPage path="/" />
-        <InfoPage path="/pokemon/:name" />
-        <NotFoundPage default />
+        <InfoPage path={Routes.info} />
+        <SearchPage default path={Routes.root} />
       </Router>
     </BaseLayout>
   );

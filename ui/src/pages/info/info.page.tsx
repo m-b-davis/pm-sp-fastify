@@ -1,18 +1,34 @@
 import React from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 import { usePokemonInfo } from 'src/hooks';
 import { SearchResult, ApiStatus } from 'src/hooks/usePokemonInfo';
+import { Button, Loader } from 'src/components';
+import { Route } from 'src/app.routing';
 
 export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
   const [data, apiStatus] = usePokemonInfo(props.name);
   const result = apiStatus === ApiStatus.Success && (data as SearchResult);
 
+  const handleSearchAgain = () => {
+    navigate(Route.root);
+  };
+
+  if (apiStatus === ApiStatus.Loading) {
+    return <Loader />;
+  }
+
+  const hasError = apiStatus === ApiStatus.Error;
+
   return (
     <>
-      <p>Pokemon name: {props.name}</p>
-      {apiStatus === ApiStatus.Loading && 'Loading'}
-      {result && result.name}
-      {apiStatus === ApiStatus.Error && 'Not found!'}
+      {hasError && <p>Pokemon not found!</p>}
+      {result && (
+        <>
+          <h1>{result.name}</h1>
+          <h2>{result.description}</h2>
+        </>
+      )}
+      <Button onClick={handleSearchAgain}>Searcb again?</Button>
     </>
   );
 }
