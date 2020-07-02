@@ -12,21 +12,34 @@ export enum ApiStatus {
   Error,
 }
 
-const delay = (ms: number) => new Promise((res) => setTimeout(() => res(), ms));
+type Options = {
+  delayRequestMs?: number;
+};
 
-export function usePokemonInfo(searchTerm?: string) {
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+/**
+ * Hook which fetches shakespearian translation for a given pokemonName
+ * @param pokemonName Name of pokemon to fetch translation for
+ * @param options Configuration options for hook (see Config)
+ */
+export function usePokemonInfo(pokemonName: string | undefined, options?: Options) {
   const [searchResult, setSearchResult] = useState<SearchResult | undefined>();
   const [apiStatus, setApiStatus] = useState<ApiStatus>(ApiStatus.Ready);
 
   useEffect(() => {
-    async function fetchPokemonInfo(searchTerm?: string) {
-      if (searchTerm !== undefined) {
+    async function fetchPokemonInfo(pokemonName?: string) {
+      if (pokemonName !== undefined) {
         setApiStatus(ApiStatus.Loading);
-        const url = `http://0.0.0.0:9191/pokemon/${searchTerm}`;
-        await delay(1000);
+        const url = `http://0.0.0.0:9191/pokemon/${pokemonName}`;
+
+        if (options && options.delayRequestMs) {
+          // Delay for visual effect
+          await delay(options.delayRequestMs);
+        }
+
         const result = await fetch(url);
 
-        console.log(result);
         if (result.ok) {
           const json = await result.json();
           setSearchResult(json);
@@ -37,8 +50,8 @@ export function usePokemonInfo(searchTerm?: string) {
       }
     }
 
-    fetchPokemonInfo(searchTerm);
-  }, [searchTerm]);
+    fetchPokemonInfo(pokemonName);
+  }, [pokemonName, options]);
 
   return [searchResult, apiStatus];
 }

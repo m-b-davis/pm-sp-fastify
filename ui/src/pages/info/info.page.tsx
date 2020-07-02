@@ -6,7 +6,7 @@ import { Button, Loader } from 'src/components';
 import { Route } from 'src/app.routing';
 
 export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
-  const [data, apiStatus] = usePokemonInfo(props.name);
+  const [data, apiStatus] = usePokemonInfo(props.name, { delayRequestMs: 1000 });
   const result = apiStatus === ApiStatus.Success && (data as SearchResult);
 
   const handleSearchAgain = () => {
