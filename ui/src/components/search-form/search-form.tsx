@@ -10,13 +10,20 @@ export function SearchForm(props: Props) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
-    props.onSearch(searchTerm);
+    if (searchTerm !== '') {
+      props.onSearch(searchTerm);
+    }
   };
 
   return (
     <>
       <div className={styles.wrapper}>
-        <Input className={styles.searchInput} value={searchTerm} onChange={setSearchTerm} />
+        <Input
+          className={styles.searchInput}
+          value={searchTerm}
+          onChange={setSearchTerm}
+          placeholder="E.g Charizard..."
+        />
         <Button className={styles.searchButton} onClick={handleSearch}>
           Go!
         </Button>

@@ -5,7 +5,6 @@ import { join } from 'src/utils';
 type Props = PropsWithChildren<{
   className?: string;
   onClick?: () => void;
-  danger?: boolean;
   icon?: string;
 }>;
 
