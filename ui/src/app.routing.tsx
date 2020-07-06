@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchPage, InfoPage, NotFoundPage } from './pages';
+import { SearchPage, InfoPage } from './pages';
 
 export type InfoRouteProps = { name?: string };
 
@@ -11,12 +11,10 @@ export const Route = {
 };
 
 const rootRoute = () => <SearchPage />;
-const notFoundRoute = () => <NotFoundPage />;
 const infoRoute = ({ name }: InfoRouteProps) => <InfoPage name={name} />;
 
 export const routes = {
   [Route.root]: rootRoute,
   [Route.search]: rootRoute,
   [Route.info]: infoRoute,
-  [Route.notFound]: notFoundRoute,
 };
