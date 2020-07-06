@@ -1,7 +1,17 @@
-@import '../../styles/spacing.scss';
 @import '../../styles/variables.scss';
 
 .button {
+
+  width: 280px;
+  margin: $small $medium;
+  border: 2px #2363c1 solid;
+  border-radius: 28px;
+  background: #1f1f1f;
   cursor: pointer;
-  padding: $small;
+  padding: $small $large;
+  color: white;
+  
+  i {
+    margin-right: 10px;
+  }
 }

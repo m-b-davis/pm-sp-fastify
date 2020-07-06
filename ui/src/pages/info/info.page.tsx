@@ -5,22 +5,13 @@ import { Route } from 'src/app.routing';
 
 import { useState, useEffect } from 'react';
 import { Config } from 'src/config';
+import { SearchResult, ApiStatus } from 'src/api/types';
+import { toggleFavourite } from 'src/utils/local-storage';
+import styles from './info.module.scss';
 
 const getUrlCreator = (baseUrl: string) => ({
   getShakespearianDescription: (pokemonName: string) => `${baseUrl}/pokemon/${pokemonName}`,
 });
-
-type SearchResult = {
-  name: string;
-  description: string;
-};
-
-enum ApiStatus {
-  Ready,
-  Loading,
-  Success,
-  Error,
-}
 
 type Options = {
   delayRequestMs?: number;
@@ -84,11 +75,17 @@ function usePokemonInfo(pokemonName: string | undefined, options?: Options) {
 
 export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
   const [data, apiStatus] = usePokemonInfo(props.name, { delayRequestMs: 1000 });
-  const result = apiStatus === ApiStatus.Success && (data as SearchResult);
+  const result = apiStatus === ApiStatus.Success ? (data as SearchResult) : undefined;
   const hasError = apiStatus === ApiStatus.Error;
+  const [isFavourite, setIsFavourite] = useState(false);
 
   const handleSearchAgain = () => {
     navigate(Route.root);
+  };
+
+  const handleToggleFavourite = () => {
+    toggleFavourite(result);
+    setIsFavourite(!isFavourite);
   };
 
   if (apiStatus === ApiStatus.Loading) {
@@ -101,9 +98,23 @@ export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
       {result && (
         <>
           <h1>{result.name}</h1>
-          <p>{result.description}</p>
+          <div className={styles.description}>
+            <h3>Translation:</h3>
+            <p>{result.description}</p>
+          </div>
+
+          {isFavourite ? (
+            <Button icon="heart-o" onClick={handleToggleFavourite}>
+              Remove from favourites
+            </Button>
+          ) : (
+            <Button icon="heart" className={styles.favourite} onClick={handleToggleFavourite}>
+              Add to favourites
+            </Button>
+          )}
         </>
       )}
+
       <Button onClick={handleSearchAgain}>Search again?</Button>
     </>
   );

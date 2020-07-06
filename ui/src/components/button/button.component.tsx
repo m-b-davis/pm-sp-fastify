@@ -14,7 +14,7 @@ export const Button = ({ className, children, onClick, icon }: Props) => {
   return (
     <button className={classes} onClick={onClick}>
       <span>
-        {icon && <i className={join(styles.fa, icon)}></i>}
+        {icon && <i className={join('fa', `fa-${icon}`)}></i>}
         {children}
       </span>
     </button>

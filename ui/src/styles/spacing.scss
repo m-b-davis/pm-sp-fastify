@@ -1,11 +1,14 @@
 $small: 16px;
 $medium: 24px;
 $large: 32px;
+$xlarge: 48px;
 
 $spacing-sizes:
   "small" $small,
   "medium" $medium,
-  "large" $large;
+  "large" $large,
+  "xlarge" $xlarge;
+
 
 $spacing-dimensions: 
   "left" "l",

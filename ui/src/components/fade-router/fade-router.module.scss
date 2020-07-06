@@ -2,21 +2,27 @@
   display: none;
   opacity: 0;
   z-index: 1;
-  transition: opacity .3s ease-in;
+  transform: scale(4);
+  transition: all .3s ease-in;
 }
 
 .enterActive, .enterDone {
+  transform: scale(1);
   opacity: 1;
 }
 
 .exit {
   opacity: 1;
   z-index: 1;
-  transition: opacity .1s ease-in;
+  transform: scale(1);
+
+  transition: all .3s ease-in;
 }
 
 .exitActive, .exitDone {
   opacity: 0;
+  transform: scale(.2);
+
 }
 
 .exitDone {

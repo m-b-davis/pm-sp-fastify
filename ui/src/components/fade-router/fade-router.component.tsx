@@ -8,7 +8,7 @@ export const FadeTransitionRouter = (props: PropsWithChildren<unknown>) => (
   <Location>
     {({ location }) => (
       <TransitionGroup>
-        <CSSTransition key={location.key} classNames={{ ...styles }} timeout={300}>
+        <CSSTransition key={location.key} classNames={{ ...styles }} timeout={500}>
           {/* the only difference between a router animation and
               any other animation is that you have to pass the
               location to the router so the old screen renders

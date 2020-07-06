@@ -1,14 +1,13 @@
 
-  h1, h2 {
+  h1, h2, h3 {
     font-family: Aleo;
     font-weight: 700;
   }
 
   h1 {
-    margin-bottom: 3rem;
     line-height: 9rem;
-    font-size: 6em;
-  }
+    font-size: 4rem;
+    }
 
   h2 {
     margin-bottom: 3rem;
@@ -16,7 +15,17 @@
     font-size: 4.88281em;
   }
 
+
+  h3 {
+    margin-bottom: .5rem;
+    line-height: 4rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+
   p {
+    margin-top: .5rem;
     margin-bottom: 3rem;
     line-height: 3rem;
     font-size: 1.6em;
