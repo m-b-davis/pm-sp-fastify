@@ -10,19 +10,15 @@ function getFromLocalStorage<T>(key: string, defaultValue: T): T {
 }
 
 export const getIsFavourite = (result: SearchResult, favourites: SearchResult[]) => {
-  if (!result) {
-    return false;
-  }
-
   return !!favourites.find((pokemon) => pokemon.name === result.name);
 };
 
-export const addFavourite = (result: SearchResult, favourites: SearchResult[]) => {
+const addFavourite = (result: SearchResult, favourites: SearchResult[]) => {
   const nextFavourites = [...favourites, result];
   localStorage.setItem('favourites', JSON.stringify(nextFavourites));
 };
 
-export const removeFavourite = (result: SearchResult, favourites: SearchResult[]) => {
+const removeFavourite = (result: SearchResult, favourites: SearchResult[]) => {
   const nextFavourites = favourites.filter((pokemon) => pokemon.name !== result.name);
   localStorage.setItem('favourites', JSON.stringify(nextFavourites));
 };
