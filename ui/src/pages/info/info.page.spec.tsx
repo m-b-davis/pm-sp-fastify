@@ -6,6 +6,7 @@ import { mocked } from 'ts-jest/dist/util/testing';
 
 import InfoPage from './info.page';
 import { Route } from 'src/app.routing';
+import { mockFavourites } from 'src/test/mocks';
 
 const serverBaseUrl = 'https://foo-base-url';
 
@@ -27,14 +28,21 @@ describe('Info Page', () => {
   const pokemonName = 'foo';
   const pokemonDescription = 'foo description';
 
+  let setLocalStorageItem: jest.SpyInstance;
+
+  beforeEach(() => {
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(JSON.stringify(mockFavourites));
+    setLocalStorageItem = jest.spyOn(Storage.prototype, 'setItem');
+  });
+
   it('should initially show loader when page is rendered', async () => {
-    const result = render(<InfoPage name="foo" />);
+    const result = render(<InfoPage name={pokemonName} />);
     const loadingState = await result.findByText('Loading...');
 
     expect(loadingState).toBeInTheDocument();
   });
 
-  describe('when api returns successfully', () => {
+  describe('when api returns successfully and pokemon in favourites', () => {
     beforeEach(() => {
       nock(serverBaseUrl)
         .defaultReplyHeaders({
@@ -52,32 +60,86 @@ describe('Info Page', () => {
       nock.cleanAll();
     });
 
-    it('should render result', async () => {
-      const result = render(<InfoPage name="foo" />);
-      const nameElement = (await result.findByRole('heading')) as HTMLHeadingElement;
+    it('should render name and description of pokemon', async () => {
+      const result = render(<InfoPage name={pokemonName} />);
+      const nameElement = (await result.findByText(pokemonName)) as HTMLHeadingElement;
       const descriptionElement = (await result.findByText(pokemonDescription)) as HTMLParagraphElement;
 
       expect(nameElement).toBeInTheDocument();
-      expect(nameElement.textContent).toEqual(pokemonName);
-
       expect(descriptionElement).toBeInTheDocument();
-      expect(descriptionElement.textContent).toEqual(pokemonDescription);
     });
 
     it('should render search again button', async () => {
-      const result = render(<InfoPage name="foo" />);
-      const button = (await result.findByRole('button')) as HTMLButtonElement;
+      const result = render(<InfoPage name={pokemonName} />);
+      const button = (await result.findByText('Search again?')) as HTMLButtonElement;
 
       expect(button).toBeInTheDocument();
     });
 
     it('should navigate back to search when button clicked', async () => {
-      const result = render(<InfoPage name="foo" />);
-      const button = (await result.findByRole('button')) as HTMLButtonElement;
+      const result = render(<InfoPage name={pokemonName} />);
+      const button = (await result.findByText('Search again?')) as HTMLButtonElement;
 
       fireEvent.click(button);
 
       expect(mockNavigate).toHaveBeenCalledWith(Route.root);
+    });
+
+    it('should render remove favourite button when in favourites', async () => {
+      const result = render(<InfoPage name={pokemonName} />);
+      const button = (await result.findByText('Remove favourite')) as HTMLButtonElement;
+
+      expect(button).toBeInTheDocument();
+    });
+
+    it('should write to local storage when remove favourite button clicked', async () => {
+      const result = render(<InfoPage name={pokemonName} />);
+      const button = (await result.findByText('Remove favourite')) as HTMLButtonElement;
+      button.click();
+
+      const nextFavourites = [mockFavourites[1]];
+
+      expect(setLocalStorageItem).toHaveBeenCalledWith('favourites', JSON.stringify(nextFavourites));
+    });
+  });
+
+  describe('when api returns successfully and pokemon not in favourites', () => {
+    const nonFavouritePokemonName = 'foo-2';
+
+    beforeEach(() => {
+      nock(serverBaseUrl)
+        .defaultReplyHeaders({
+          'access-control-allow-origin': '*',
+          'access-control-allow-credentials': 'true',
+        })
+        .get(`/pokemon/${nonFavouritePokemonName}`, () => true)
+        .reply(200, {
+          name: nonFavouritePokemonName,
+          description: pokemonDescription,
+        });
+    });
+
+    it('should render add to favourites button when not in favourites', async () => {
+      const result = render(<InfoPage name={nonFavouritePokemonName} />);
+      const button = (await result.findByText('Add to favourites')) as HTMLButtonElement;
+
+      expect(button).toBeInTheDocument();
+    });
+
+    it('should write to local storage when add to favourites button clicked', async () => {
+      const result = render(<InfoPage name={nonFavouritePokemonName} />);
+      const button = (await result.findByText('Add to favourites')) as HTMLButtonElement;
+      button.click();
+
+      const nextFavourites = [
+        ...mockFavourites,
+        {
+          name: nonFavouritePokemonName,
+          description: pokemonDescription,
+        },
+      ];
+
+      expect(setLocalStorageItem).toHaveBeenCalledWith('favourites', JSON.stringify(nextFavourites));
     });
   });
 
@@ -97,22 +159,22 @@ describe('Info Page', () => {
     });
 
     it('should render not found message', async () => {
-      const result = render(<InfoPage name="foo" />);
+      const result = render(<InfoPage name={pokemonName} />);
       const notFoundElement = (await result.findByText('Pokemon not found!')) as HTMLParagraphElement;
 
       expect(notFoundElement).toBeInTheDocument();
     });
 
     it('should render search again button', async () => {
-      const result = render(<InfoPage name="foo" />);
-      const button = (await result.findByRole('button')) as HTMLButtonElement;
+      const result = render(<InfoPage name={pokemonName} />);
+      const button = (await result.findByText('Search again?')) as HTMLButtonElement;
 
       expect(button).toBeInTheDocument();
     });
 
     it('should navigate back to search when button clicked', async () => {
-      const result = render(<InfoPage name="foo" />);
-      const button = (await result.findByRole('button')) as HTMLButtonElement;
+      const result = render(<InfoPage name={pokemonName} />);
+      const button = (await result.findByText('Search again?')) as HTMLButtonElement;
 
       fireEvent.click(button);
 
