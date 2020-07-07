@@ -1,28 +1,64 @@
 @import '../../styles/variables.scss';
 
-.favourite {
-  i {
-    color: pink;
-  }
+$hr-circle-diameter: 12px;
 
-  border-color: pink;
+.title {
+  text-transform: capitalize;
+}
+
+.favouriteActive {
+  i {
+    color: $white;
+  }
 }
 
 .description {
-      border-width: 2px;
-    border-style: solid;
-    border-radius: 28px;
-    background: #1f1f1f;
-    cursor: pointer;
-    color: white;
-    margin: 48px;
-    
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 28px;
-  background: #1f1f1f;
+  background: transparent;
   cursor: pointer;
-  padding: $small $large;
-  color: white;
-  margin: $xlarge;
+  padding: $small 0;
+  color: $white;
+  margin: $small;
+  max-width: 95vw;
+  box-sizing: border-box;
+
+  hr {
+    position: relative;
+    margin: $small $large;
+
+    &:before {
+      content: '';
+      width: $hr-circle-diameter;
+      height: $hr-circle-diameter;
+      top: calc(-#{$hr-circle-diameter} / 2);
+      background: $white;
+      position: absolute;
+      border-radius: 50%;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    width: 95vw;
+    margin: 0;
+  }
+}
+
+.buttonContainer {
+  margin-top: $large;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+  
+  button {
+    margin: 0 $small;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+      margin: 0 0 $medium 0;
+    }
+  }
 }

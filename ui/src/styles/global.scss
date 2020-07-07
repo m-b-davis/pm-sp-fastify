@@ -1,8 +1,5 @@
-// :global {
-  @import './typography.scss';
-  @import './variables.scss';
-// }
 
-// h1 {
-//   font-family: Aleo;
-// }
+@import './typography.scss';
+@import './variables.scss';
+@import './reset.scss';
+

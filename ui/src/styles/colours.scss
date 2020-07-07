@@ -1,0 +1,19 @@
+$blue-light: #90bddf;
+$blue-medium: #2c4b9d;
+$blue-dark: #132e70;
+
+$yellow: #fcda21;
+$yellow-dark: #a7811c;
+
+$yellow-hilight: lighten($yellow, 10%);
+$yellow-dark-hilight: lighten($yellow-dark, 10%);
+
+$red-pink: #ec4356;
+$purple: #961a7d;
+
+$red-pink-hilight: lighten($red-pink, 10%);
+$purple-hilight: lighten($purple, 10%);
+
+$pink: #ff6464;
+$black: #09090a;
+$white: white;

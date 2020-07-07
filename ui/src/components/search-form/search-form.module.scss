@@ -1,6 +1,32 @@
+@import '../../styles/variables.scss';
 
 .wrapper {
-  display: flex;
+  margin-top: $medium;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+
+  button { 
+    margin-left: $small;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 0;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-evenly;
+    
+    button {
+      margin-top: $medium;
+      margin-left: 0;
+      flex-grow: 1;
+    }
+
+    .searchInput {
+      width: 100%;
+      max-width: 80vw;
+    }
+  }
 }
 
 .searchInput { 

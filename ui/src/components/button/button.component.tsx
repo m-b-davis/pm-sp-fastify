@@ -6,10 +6,12 @@ type Props = PropsWithChildren<{
   className?: string;
   onClick?: () => void;
   icon?: string;
+  isSmall?: boolean;
+  type?: 'primary' | 'secondary';
 }>;
 
-export const Button = ({ className, children, onClick, icon }: Props) => {
-  const classes = join(className, styles.button);
+export const Button = ({ className, children, onClick, icon, isSmall, type = 'primary' }: Props) => {
+  const classes = join(className, styles.button, isSmall ? styles.small : undefined, styles[type]);
 
   return (
     <button className={classes} onClick={onClick}>

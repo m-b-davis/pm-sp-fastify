@@ -1,7 +1,13 @@
+$xxxsmall: 2px;
+$xxsmall: 4px;
+$xsmall: 8px;
 $small: 16px;
 $medium: 24px;
 $large: 32px;
 $xlarge: 48px;
+$xxlarge: 96px;
+$xxxlarge: 192px;
+$xxxxlarge: 288px;
 
 $spacing-sizes:
   "small" $small,
@@ -26,4 +32,8 @@ $spacing-dimensions:
       padding-#{$side}: $size;
     }
   }
+}
+
+section {
+  margin-bottom: $xlarge;
 }

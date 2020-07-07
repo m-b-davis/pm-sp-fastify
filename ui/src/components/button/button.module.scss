@@ -1,17 +1,46 @@
 @import '../../styles/variables.scss';
 
-.button {
+$button-primary-bg-regular: linear-gradient(to bottom, $yellow 0%, $yellow-dark 100%);
+$button-primary-bg-hover: linear-gradient(to bottom, $yellow-hilight 0%, $yellow-dark-hilight 100%);
 
-  width: 280px;
-  margin: $small $medium;
-  border: 2px white solid;
-  border-radius: 28px;
-  background: #2363c1;
+$button-secondary-bg-regular: linear-gradient(to bottom, $red-pink 0%, $purple 100%);
+$button-secondary-bg-hover: linear-gradient(to bottom, $red-pink-hilight 0%, $purple 100%);
+
+.button {
+  width: $xxxxlarge;
+  border: none;
+  border-radius: $xsmall;
   cursor: pointer;
   padding: $small $large;
-  color: white;
-  
+  color: $black;
+  font-family: aleo;
+  font-size: 1.2rem;
+  transition: 0.3s ease-in all;
+
+  &.primary {
+    background: $button-primary-bg-regular;
+
+    &:hover {
+      background: $button-primary-bg-hover;
+    }
+  }
+
+  &.secondary {
+    color: white;
+    background: $button-secondary-bg-regular;
+
+    &:hover {
+      background: $button-secondary-bg-hover;
+    }
+  }
+
   i {
     margin-right: 10px;
   }
+
+  &.small {
+    width: auto;
+  }
+
+
 }

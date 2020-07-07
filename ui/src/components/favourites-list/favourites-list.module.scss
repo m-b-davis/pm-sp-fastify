@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  li {
+    margin: $xsmall;
+
+    p {
+      flex-grow: 1;
+    }
+  }
+}

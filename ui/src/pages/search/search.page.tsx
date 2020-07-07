@@ -1,7 +1,9 @@
 import React from 'react';
-import { SearchForm } from 'src/components';
+import { SearchForm, FavouritesList } from 'src/components';
 import { RouteComponentProps, navigate } from '@reach/router';
 import { createInfoRoute } from 'src/App';
+import { getFavourites } from 'src/utils/local-storage';
+import { SearchResult } from 'src/api/types';
 
 export default function SearchPage(_: RouteComponentProps) {
   const handleSearch = (searchTerm: string) => {
@@ -9,15 +11,24 @@ export default function SearchPage(_: RouteComponentProps) {
     navigate(nextRoute);
   };
 
+  const handleSelectFavourite = (selection: SearchResult) => {
+    const nextRoute = createInfoRoute(selection.name);
+    navigate(nextRoute);
+  };
+
+  const favourites = getFavourites();
+
   return (
     <>
-      {/* <h3>Shakespeare Pokemon Search</h3> */}
       <h2>Shakespeare-ify</h2>
-      <h3>Enter Pokemon Name:</h3>
-      <br />
-      <br />
+      <section>
+        <h3>Enter Pokemon Name:</h3>
+        <SearchForm onSearch={handleSearch} />
+      </section>
 
-      <SearchForm onSearch={handleSearch} />
+      <section>
+        <FavouritesList favourites={favourites} onSelect={handleSelectFavourite} />
+      </section>
     </>
   );
 }

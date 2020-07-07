@@ -11,7 +11,7 @@ export function SearchForm(props: Props) {
 
   const handleSearch = () => {
     if (searchTerm !== '') {
-      props.onSearch(searchTerm);
+      props.onSearch(searchTerm.toLowerCase());
     }
   };
 
@@ -24,8 +24,8 @@ export function SearchForm(props: Props) {
           onChange={setSearchTerm}
           placeholder="E.g Charizard..."
         />
-        <Button className={styles.searchButton} onClick={handleSearch}>
-          Go!
+        <Button className={styles.searchButton} onClick={handleSearch} isSmall icon="search">
+          Go
         </Button>
       </div>
     </>

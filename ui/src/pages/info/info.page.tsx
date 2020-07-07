@@ -6,7 +6,7 @@ import { Route } from 'src/app.routing';
 import { useState, useEffect } from 'react';
 import { Config } from 'src/config';
 import { SearchResult, ApiStatus } from 'src/api/types';
-import { toggleFavourite } from 'src/utils/local-storage';
+import { toggleFavourite, getIsFavourite, getFavourites } from 'src/utils/local-storage';
 import styles from './info.module.scss';
 
 const getUrlCreator = (baseUrl: string) => ({
@@ -88,34 +88,56 @@ export default function InfoPage(props: RouteComponentProps<{ name: string }>) {
     setIsFavourite(!isFavourite);
   };
 
+  useEffect(() => {
+    if (result) {
+      const favourites = getFavourites();
+      const isLocalStorageFavourite = getIsFavourite(result, favourites);
+      setIsFavourite(isLocalStorageFavourite);
+    }
+  }, [result]);
+
   if (apiStatus === ApiStatus.Loading) {
     return <Loader />;
   }
 
+  const SearchAgainButton = () => (
+    <Button onClick={handleSearchAgain} icon="arrow-left">
+      Search again?
+    </Button>
+  );
+
   return (
     <>
-      {hasError && <p>Pokemon not found!</p>}
-      {result && (
+      {hasError && (
         <>
-          <h1>{result.name}</h1>
-          <div className={styles.description}>
-            <h3>Translation:</h3>
-            <p>{result.description}</p>
-          </div>
-
-          {isFavourite ? (
-            <Button icon="heart-o" onClick={handleToggleFavourite}>
-              Remove from favourites
-            </Button>
-          ) : (
-            <Button icon="heart" className={styles.favourite} onClick={handleToggleFavourite}>
-              Add to favourites
-            </Button>
-          )}
+          <h3>Pokemon not found!</h3>
+          {<SearchAgainButton />}
         </>
       )}
 
-      <Button onClick={handleSearchAgain}>Search again?</Button>
+      {result && (
+        <>
+          <h1 className={styles.title}>{result.name}</h1>
+          <div className={styles.description}>
+            <h3>Translation:</h3>
+            <hr />
+            <p>{result.description}</p>
+          </div>
+
+          <div className={styles.buttonContainer}>
+            {isFavourite ? (
+              <Button icon="heart" type="secondary" className={styles.favouriteActive} onClick={handleToggleFavourite}>
+                Remove favourite
+              </Button>
+            ) : (
+              <Button icon="heart-o" onClick={handleToggleFavourite}>
+                Add to favourites
+              </Button>
+            )}
+            <SearchAgainButton />
+          </div>
+        </>
+      )}
     </>
   );
 }

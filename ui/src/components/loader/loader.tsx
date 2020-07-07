@@ -6,7 +6,7 @@ import styles from './loader.module.scss';
 export function Loader() {
   return (
     <div className={styles.loader}>
-      <p>Loading...</p>
+      <h3>Loading...</h3>
       <div className={styles.normal}></div>
       <div className={styles.great}></div>
       <div className={styles.ultra}></div>
