@@ -4,6 +4,10 @@ Shakespearify transforms pokemon names into their shakesperian description.
 
 This is a mono-repo containing both the client and server applications. These can be run standalone or within containers.
 
+![Desktop view of website][desktop-view]
+
+![Mobile view of website][mobile-view]
+
 ### Technologies:
  - Front-end:
    - TypeScript
@@ -44,3 +48,9 @@ If you need to change .env vars, do so in the root and then re-run this command 
  - Make sure both apps are not running in development mode as they will be served from the same ports
  - Go to the root folder and run ./run.sh. This will run the tests and then start docker-compose
  - Once complete, both services should be accessible at `http://localhost:4000` (UI) and `http://localhost:9191`. Note that this will change if the values in .env are changed
+ 
+ 
+[//]: # (Image References)
+[desktop-view]: https://i.imgur.com/ixiZgZ9.png "Shakespeareify Desktop View"
+[mobile-view]: https://i.imgur.com/sTP2GpZ.png "Shakespeareify Mobile View"
+
