@@ -14,13 +14,13 @@ const mockNavigate = mocked(navigate, true);
 describe('Search Page', () => {
   it('should render title', async () => {
     const result = render(<SearchPage />);
-    const title = await result.findByText('Shakespeare Pokemon Search');
+    const title = await result.findByText('Shakespeare-ify');
     expect(title).toBeInTheDocument();
   });
 
   it('should render subtitle', async () => {
     const result = render(<SearchPage />);
-    const subTitle = await result.findByText('Enter Pokemon Name!');
+    const subTitle = await result.findByText('Enter Pokemon Name:');
     expect(subTitle).toBeInTheDocument();
   });
 

@@ -32,12 +32,12 @@ describe('SearchForm', () => {
     const onSearch = jest.fn();
     const inputText = 'foo';
 
-    const { findByRole } = render(<SearchForm onSearch={jest.fn()} />);
-    const textbox = (await findByRole('textbox')) as HTMLInputElement;
+    const { findByRole } = render(<SearchForm onSearch={onSearch} />);
 
-    const button = await findByRole('button');
+    const textbox = (await findByRole('textbox')) as HTMLInputElement;
     fireEvent.change(textbox, { target: { value: inputText } });
 
+    const button = await findByRole('button');
     button.click();
 
     expect(onSearch).toHaveBeenCalledWith(inputText);
