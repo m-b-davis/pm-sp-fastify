@@ -9,7 +9,7 @@ RUN npm run build
 
 # stage: 2 — the production environment
 FROM nginx:alpine
-COPY --from=react-build /app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+COPY --from=react-build /app/build /var/www
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 4000
 CMD ["nginx", "-g", "daemon off;"]

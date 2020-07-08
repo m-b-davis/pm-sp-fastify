@@ -1,3 +1,3 @@
 export const Config = {
-  serverBaseUrl: 'http://0.0.0.0:9191',
+  serverBaseUrl: process.env.REACT_APP_API_SERVER_HOST,
 };

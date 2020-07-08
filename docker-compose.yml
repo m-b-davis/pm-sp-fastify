@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+### NODE CONTAINER ###
+  server:
+    build: ./server
+    expose: 
+      - ${API_SERVER_PORT}
+    environment:
+      API_SERVER_PORT: ${API_SERVER_PORT}
+    ports:
+      - ${API_SERVER_PORT}:${API_SERVER_PORT}
+    volumes:
+      - ./server/src:/app/src
+    command: node ./dist/index.js
+
+### UI CONTAINER ###
+  nginx:
+    build: ./ui
+    command: ["nginx", "-g", "daemon off;"]
+    environment:
+      PORT: ${PORT}
+      REACT_APP_API_SERVER_HOST: ${REACT_APP_API_SERVER_HOST}
+    depends_on:
+        - server
+    ports:
+        - ${PORT}:${PORT}
+    volumes:
+      - ./ui/nginx:/app/etc/nginx/
+    restart: always
