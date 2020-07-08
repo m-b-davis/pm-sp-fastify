@@ -1,3 +1,5 @@
+#!/bin/bash
+set -e
 
 copy_env_files() {
   echo "Copying env file to ui"
@@ -10,19 +12,21 @@ copy_env_files() {
 run_tests() {
   export CI=true
   cd ui
-  npm run test || echo "\nUI tests failed!" 1>&2
+  npm run test
+  echo "UI tests passed!"
 
   cd ../server
-  npm run test a || echo "\nServer tests failed!" 1>&2
+  npm run test a
+  echo "Server tests passed!"
   
   cd ..
-  echo "\nAll tests passed!"
+  echo "All tests passed!"
 }
 
 start_docker() {
   echo "Starting docker containers..."
 
-  docker-compose up
+  docker-compose up --build
 }
 
 copy_env_files

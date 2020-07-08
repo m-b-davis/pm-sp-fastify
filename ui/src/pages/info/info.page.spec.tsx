@@ -8,15 +8,7 @@ import InfoPage from './info.page';
 import { Route } from 'src/app.routing';
 import { mockFavourites } from 'src/test/mocks';
 
-const serverBaseUrl = 'https://foo-base-url';
-
-jest.mock('src/config', () => ({
-  get Config() {
-    return {
-      serverBaseUrl: 'https://foo-base-url',
-    };
-  },
-}));
+const serverBaseUrl = process.env.REACT_APP_API_SERVER_HOST as string;
 
 jest.mock('@reach/router', () => ({
   navigate: jest.fn(),

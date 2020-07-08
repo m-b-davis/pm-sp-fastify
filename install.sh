@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 read_var() {
   if [ -z "$1" ]; then
     echo "environment variable name is required"
@@ -35,14 +38,14 @@ copy_env_files() {
   read -p "Copy .env file to server and ui? (y/n)? " answer
   case ${answer:0:1} in
     y|Y )
-          echo "Copying env file to ui"
-          cp .env ui/
-          echo "Copying env file to server"
-          cp .env server/
-          echo ".env setup complete!"
+      echo "Copying env file to ui"
+      cp .env ui/
+      echo "Copying env file to server"
+      cp .env server/
+      echo ".env setup complete!"
     ;;
     * )
-        echo "Skipping .env setup"
+      echo "Skipping .env setup"
     ;;
   esac
 }
@@ -51,19 +54,19 @@ install_project_deps() {
   read -p "Install npm dependencies for ui and server (y/n)? " answer
   case ${answer:0:1} in
     y|Y )
-          echo "Installing deps for ui..."
-          cd ui
-          npm install
-          echo "Installing deps for server"
-          cd ../server
-          npm install
-          echo "Install dependencies complete!"
-          cd ..
-          echo "Now you're ready to go. Start each app by running npm start in /ui and in /server"
+      echo "Installing deps for ui..."
+      cd ui
+      npm install
+      echo "Installing deps for server"
+      cd ../server
+      npm install
+      echo "Install dependencies complete!"
+      cd ..
+      echo "Now you're ready to go. Start each app by running npm start in /ui and in /server"
     ;;
     * )
-        echo "Skipping dependencies install"
-        echo "Make sure you install deps before trying to start the apps!"
+      echo "Skipping dependencies install"
+      echo "Make sure you install deps before trying to start the apps!"
     ;;
   esac
 }

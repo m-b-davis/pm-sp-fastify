@@ -12,5 +12,5 @@ function getEnvironmentVariable(name: string) {
 }
 
 export const Config = {
-  serverBaseUrl: getEnvironmentVariable('SERVER_HOST'),
+  serverBaseUrl: getEnvironmentVariable('API_SERVER_HOST'),
 };
