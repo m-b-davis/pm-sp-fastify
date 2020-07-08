@@ -42,5 +42,5 @@ If you need to change .env vars, do so in the root and then re-run this command 
 
 ### Running within Docker (Production)
  - Make sure both apps are not running in development mode as they will be served from the same ports
- - Go to the root folder and run `docker-compose up`
+ - Go to the root folder and run ./run.sh. This will run the tests and then start docker-compose
  - Once complete, both services should be accessible at `http://localhost:4000` (UI) and `http://localhost:9191`. Note that this will change if the values in .env are changed
